@@ -141,9 +141,9 @@ build librdkafka "([ -f config.h ] || ./configure --prefix=$DEST $lrk_install_de
 github_download "edenhill/yajl" "edenhill" "libyajl"
 build libyajl "([ -d build ] || ./configure --prefix $DEST) && make install" || (echo "Failed to build libyajl: JSON support will probably be disabled" ; true)
 
-download http://www.digip.org/jansson/releases/jansson-2.12.tar.gz libjansson
-download http://www.digip.org/jansson/releases/jansson-2.12.tar.gz libjansson
-build libjansson "([[ -f config.status ]] || ./configure --enable-static --prefix=$DEST) && make && make install" || (echo "Failed to build libjansson: AVRO support will probably be disabled" ; true)
+#download http://www.digip.org/jansson/releases/jansson-2.12.tar.gz libjansson
+#download http://www.digip.org/jansson/releases/jansson-2.12.tar.gz libjansson
+#build libjansson "([[ -f config.status ]] || ./configure --enable-static --prefix=$DEST) && make && make install" || (echo "Failed to build libjansson: AVRO support will probably be disabled" ; true)
 
 github_download "apache/avro" "release-1.8.2" "avroc"
 build avroc "cd lang/c && mkdir -p build && cd build && cmake -DCMAKE_C_FLAGS=\"$CFLAGS\" -DCMAKE_INSTALL_PREFIX=$DEST .. && make install" || (echo "Failed to build Avro C: AVRO support will probably be disabled" ; true)
