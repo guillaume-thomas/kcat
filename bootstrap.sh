@@ -135,19 +135,19 @@ else
 fi
 export PKG_CONFIG_PATH="$DEST/lib/pkgconfig"
 
-github_download "edenhill/librdkafka" "$LIBRDKAFKA_VERSION" "librdkafka"
+#github_download "edenhill/librdkafka" "$LIBRDKAFKA_VERSION" "librdkafka"
 build librdkafka "([ -f config.h ] || ./configure --prefix=$DEST $lrk_install_deps $lrk_static --disable-lz4-ext) && make -j && make install" || (echo "Failed to build librdkafka: bootstrap failed" ; false)
 
-github_download "edenhill/yajl" "edenhill" "libyajl"
+#github_download "edenhill/yajl" "edenhill" "libyajl"
 build libyajl "([ -d build ] || ./configure --prefix $DEST) && make install" || (echo "Failed to build libyajl: JSON support will probably be disabled" ; true)
 
-github_download "akheron/jansson" "2.12" "libjansson"
+#github_download "akheron/jansson" "2.12" "libjansson"
 build libjansson "([[ -f config.status ]] || ./configure --enable-static --prefix=$DEST) && make && make install" || (echo "Failed to build libjansson: AVRO support will probably be disabled" ; true)
 
-github_download "apache/avro" "release-1.8.2" "avroc"
+#github_download "apache/avro" "release-1.8.2" "avroc"
 build avroc "cd lang/c && mkdir -p build && cd build && cmake -DCMAKE_C_FLAGS=\"$CFLAGS\" -DCMAKE_INSTALL_PREFIX=$DEST .. && make install" || (echo "Failed to build Avro C: AVRO support will probably be disabled" ; true)
 
-github_download "confluentinc/libserdes" "master" "libserdes"
+#github_download "confluentinc/libserdes" "master" "libserdes"
 build libserdes "([ -f config.h ] || ./configure  --prefix=$DEST --CFLAGS=-I${DEST}/include --LDFLAGS=-L${DEST}/lib) && make && make install" || (echo "Failed to build libserdes: AVRO support will probably be disabled" ; true)
 
 popd > /dev/null
